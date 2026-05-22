@@ -15,17 +15,17 @@ const envSchema = Joi.object({
   JWT_EXPIRES_IN: Joi.string().default('15m'),
   JWT_REFRESH_EXPIRES_IN: Joi.string().default('7d'),
 
-  WOMPI_PUBLIC_KEY: Joi.string().required(),
-  WOMPI_PRIVATE_KEY: Joi.string().required(),
-  WOMPI_INTEGRITY_KEY: Joi.string().required(),
+  WOMPI_PUBLIC_KEY: Joi.string().default('pub_test_default'),
+  WOMPI_PRIVATE_KEY: Joi.string().default('prv_test_default'),
+  WOMPI_INTEGRITY_KEY: Joi.string().default('test_integrity_default'),
 
-  SMTP_HOST: Joi.string().required(),
+  SMTP_HOST: Joi.string().default('smtp-relay.brevo.com'),
   SMTP_PORT: Joi.number().port().default(587),
-  SMTP_USER: Joi.string().email().required(),
-  SMTP_PASS: Joi.string().required(),
-  EMAIL_FROM: Joi.string().email().required(),
+  SMTP_USER: Joi.string().default('noreply@example.com'),
+  SMTP_PASS: Joi.string().default('default_password'),
+  EMAIL_FROM: Joi.string().default('LibroShop <noreply@libroshop.com>'),
 
-  FRONTEND_URL: Joi.string().uri().required(),
+  FRONTEND_URL: Joi.string().uri().default('http://localhost:5173'),
 
   LOG_LEVEL: Joi.string().valid('error', 'warn', 'info', 'debug').default('info')
 }).unknown();
