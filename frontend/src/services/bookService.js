@@ -9,7 +9,7 @@ const bookService = {
   },
   getFeatured: async () => {
     const res = await axios.get(`${API_URL}/books/featured`)
-    return res.data
+    return res.data.data // El backend devuelve { success: true, data: {...} }
   },
   getByKey: async (key) => {
     const res = await axios.get(`${API_URL}/books/${key}`)

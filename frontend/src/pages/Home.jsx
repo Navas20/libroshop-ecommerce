@@ -17,7 +17,7 @@ export default function Home() {
         setFeatured({
           newReleases: data.newReleases || [],
           bestsellers: data.bestsellers || [],
-          recommended: data.recommended || []
+          recommended: data.awardWinning || [] // El backend devuelve awardWinning
         })
       })
       .catch(err => setError(err?.message || 'Error al cargar'))
