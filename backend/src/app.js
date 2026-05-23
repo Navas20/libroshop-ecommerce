@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const hpp = require('hpp');
 const morgan = require('morgan');
-const httpsRedirect = require('./middlewares/httpsRedirect');
+// const httpsRedirect = require('./middlewares/httpsRedirect'); // No necesario en Render
 const rateLimiter = require('./middlewares/rateLimiter');
 const sanitize = require('./middlewares/sanitize');
 const csrfMiddleware = require('./middlewares/csrfMiddleware');
@@ -39,7 +39,7 @@ app.use(helmet({
   }
 }));
 
-app.use(httpsRedirect);
+// app.use(httpsRedirect); // No necesario en Render - maneja HTTPS automáticamente
 
 app.use(rateLimiter.globalLimiter);
 
