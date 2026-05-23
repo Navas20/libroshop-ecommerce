@@ -18,6 +18,14 @@ const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
 
+// CORS debe ir PRIMERO para manejar preflight requests
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token', 'X-Wompi-Signature', 'X-Signature']
+}));
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -32,13 +40,6 @@ app.use(helmet({
 }));
 
 app.use(httpsRedirect);
-
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token', 'X-Wompi-Signature', 'X-Signature']
-}));
 
 app.use(rateLimiter.globalLimiter);
 
