@@ -27,7 +27,7 @@ export default function Carrito() {
 
       <div className="cart-items">
         {items.map(item => {
-          const cover = item.cover || item.cover_url || '/placeholder.jpg'
+          const cover = item.cover || item.cover_url || '/placeholder.svg'
           const displayPrice = item.price_final || item.price || 0
 
           return (

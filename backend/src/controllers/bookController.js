@@ -35,7 +35,7 @@ const getOrCreatePrice = async (bookKey) => {
 };
 
 const extractBookData = (apiBook) => {
-  const key = apiBook.key || '';
+  const key = (apiBook.key || '').replace(/^\//, '');
   const coverId = apiBook.cover_i || apiBook.cover_id;
   return {
     key,
@@ -139,7 +139,9 @@ exports.featured = async (req, res, next) => {
 exports.getByKey = async (req, res, next) => {
   try {
     let { key } = req.params;
-    if (!key.startsWith('/')) key = '/works/' + key;
+    key = key.replace(/^\//, '');
+    if (!key.startsWith('works/')) key = 'works/' + key;
+    key = '/' + key;
 
     const response = await axios.get(`${OPEN_LIBRARY}${key}.json`, { timeout: 10000 });
     const apiBook = response.data;

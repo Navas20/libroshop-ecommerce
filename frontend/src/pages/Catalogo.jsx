@@ -149,17 +149,18 @@ export default function Catalogo() {
           <div className="book-grid">
             {sortedResults.map(book => {
               const author = book.author || (book.authors ? book.authors.map(a => a.name).join(', ') : 'Autor desconocido')
-              const cover = book.cover || book.cover_url || book.covers?.[0] || '/placeholder.jpg'
+              const cover = book.cover || book.cover_url || book.covers?.[0] || '/placeholder.svg'
+              const cleanKey = book.key.replace(/^\//, '')
 
               return (
                 <div key={book.key} className="book-card">
-                  <Link to={`/libro/${book.key}`}>
+                  <Link to={`/libro/${cleanKey}`}>
                     <div className="book-card-image">
                       <img src={cover} alt={book.title} />
                     </div>
                   </Link>
                   <div className="book-card-body">
-                    <Link to={`/libro/${book.key}`}>
+                    <Link to={`/libro/${cleanKey}`}>
                       <h3 className="book-card-title">{book.title}</h3>
                     </Link>
                     <p className="book-card-author">{author}</p>

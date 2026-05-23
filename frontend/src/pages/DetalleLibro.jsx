@@ -43,7 +43,7 @@ export default function DetalleLibro() {
 
   const author = book.author || (book.authors ? book.authors.map(a => a.name).join(', ') : 'Autor desconocido')
   const subjects = book.subjects || (book.subject ? [book.subject] : [])
-  const cover = book.cover || book.cover_url || book.covers?.[0] || '/placeholder.jpg'
+  const cover = book.cover || book.cover_url || book.covers?.[0] || '/placeholder.svg'
 
   return (
     <div>
@@ -105,17 +105,18 @@ export default function DetalleLibro() {
           <div className="book-grid">
             {related.map(rel => {
               const relAuthor = rel.author || (rel.authors ? rel.authors.map(a => a.name).join(', ') : 'Autor desconocido')
-              const relCover = rel.cover || rel.cover_url || rel.covers?.[0] || '/placeholder.jpg'
+              const relCover = rel.cover || rel.cover_url || rel.covers?.[0] || '/placeholder.svg'
+              const relCleanKey = rel.key.replace(/^\//, '')
 
               return (
                 <div key={rel.key} className="book-card">
-                  <Link to={`/libro/${rel.key}`}>
+                  <Link to={`/libro/${relCleanKey}`}>
                     <div className="book-card-image">
                       <img src={relCover} alt={rel.title} />
                     </div>
                   </Link>
                   <div className="book-card-body">
-                    <Link to={`/libro/${rel.key}`}>
+                    <Link to={`/libro/${relCleanKey}`}>
                       <h3 className="book-card-title">{rel.title}</h3>
                     </Link>
                     <p className="book-card-author">{relAuthor}</p>
